@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anemia Predictor</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    /* Navbar */
+    nav {
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      align-items: center;
+    }
+    nav .logo img {
+      height: 40px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+    .check-button {
+      background: red;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .check-button:hover {
+      background: darkred;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1588774069266-1bcd6a05a9f0?auto=format&fit=crop&w=1800&q=80') 
+        no-repeat center center/cover;
+      height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    /* Sections */
+    .about-section, .form-section, .result-section, .footer {
+      padding: 3rem 2rem;
+      background: white;
+    }
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    form input, form select, form button {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    form button:hover {
+      background: darkred;
+    }
+
+    /* Result Section */
+    .result-section {
+      background: #f7f7f7;
+      text-align: center;
+    }
+    .result-box {
+      background: white;
+      display: inline-block;
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .result-box strong {
+      color: red;
+    }
+
+    /* Footer */
+    .footer {
+      background: #eee;
+      text-align: center;
+    }
+
+    /* Bounce animation */
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      80% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: bounceIn 0.6s ease;
+    }
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: red;
+    }
+    .modal-content p {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    .close-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo"><b>Anemia</b></div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#predict">Predict</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="check-button" id="checkBtn">Check</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h1>Anemia Predictor: Your Health Guardian</h1>
+    <p>Empowering you with early detection for better management and healthier living</p>
+  </section>
+
+  <!-- About -->
+  <section class="about-section" id="about">
+    <h2>About</h2>
+    <p><b>Anemia</b>: low red blood cells or hemoglobin, causing oxygen shortage. Symptoms: fatigue, weakness, shortness of breath, pale skin. Causes: nutritional deficiencies, diseases, blood loss. Treatments vary.</p>
+    <div class="info-cards">
+      <div class="card"><h3>Hemoglobin</h3><p>Healthy ranges: Men: 13.2–16.6 g/dL, Women: 11.6–15 g/dL.</p></div>
+      <div class="card"><h3>MCH</h3><p>Normal range: 27.5–33.2 picograms.</p></div>
+      <div class="card"><h3>MCHC</h3><p>Normal range: 33.4–35.5 g/dL.</p></div>
+      <div class="card"><h3>MCV</h3><p>Normal range: 80–100 femtoliters.</p></div>
+    </div>
+  </section>
+
+  <!-- Prediction Form -->
+  <section class="form-section" id="predict">
+    <h2>Enter the details:</h2>
+    <form action="/predict" method="POST">
+      <label>Gender:</label>
+      <select name="Gender">
+        <option value="0">Male</option>
+        <option value="1">Female</option>
+      </select>
+      <label>Hemoglobin (Range: 7-16):</label>
+      <input type="number" step="any" name="Hemoglobin" required>
+      <label>MCH (Range: 16-36):</label>
+      <input type="number" step="any" name="MCH" required>
+      <label>MCHC (Range: 28-34):</label>
+      <input type="number" step="any" name="MCHC" required>
+      <label>MCV (Range: 70-100):</label>
+      <input type="number" step="any" name="MCV" required>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <h3>Contact Us</h3>
+    <p>UMAR IQBAL<br>Ghaziabad, India</p>
+    <p><strong>Phone:</strong> +91 786017****<br><strong>Email:</strong> iqbalumar131@gmail.com</p>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="popupModal">
+    <div class="modal-content">
+      <h2>Health Tip</h2>
+      <p>Regular checkups can help detect anemia early for better treatment.</p>
+      <button class="close-btn" id="closeModal">Got it!</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("popupModal");
+    const checkBtn = document.getElementById("checkBtn");
+    const closeBtn = document.getElementById("closeModal");
+
+    checkBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.getElementById("predict").scrollIntoView({behavior: "smooth"});
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html> 
